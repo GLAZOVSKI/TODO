@@ -1,0 +1,116 @@
+body {
+    background: #222222;
+}
+
+.shadow {
+    background: #222222;
+    opacity: 0.9;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: all 2s;
+    z-index: 999;
+    display: none;
+    animation: shadow 0.4s;
+}
+
+.edit-task {
+    height: 40px;
+    right: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.priority {
+    cursor: pointer;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.date-notepad-list {
+    font-size: 10pt;
+    position: absolute;
+    right: 4px;
+    bottom: 1px;
+}
+
+.container-notepad-list {
+    cursor: pointer;
+}
+
+.window-add-notepad {
+    z-index: 1000;
+}
+
+.create-notepad > div:nth-child(1) {
+    opacity: 1;
+    animation: show 0.4s;
+}
+
+.create-notepad {
+    display: none;
+}
+
+.window-notepad {
+    display: none;
+    animation: showStart 1s;
+}
+
+.windowEditTask {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.task {
+    animation: show 0.4s;
+}
+
+@keyframes shadow {
+    0% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 0.9;
+    }
+}
+
+@keyframes show {
+    0% {
+        opacity: 0.1;
+        width: 70%;
+    }
+
+    100% {
+        opacity: 1;
+        width: 100%;
+    }
+}
+
+@keyframes showStart {
+    0% {
+        opacity: 0.1;
+        top: -100%;
+    }
+
+    100% {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+@keyframes showEnd {
+    0% {
+        opacity: 1;
+        top: 0;
+    }
+
+    100% {
+        opacity: 0;
+        top: -100%;
+    }
+}

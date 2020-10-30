@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ri">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/notepad.js" defer></script>
+    <script src="js/task.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>TODO</title>
+</head>
+<body>
+    <div class="shadow p-2" id="shadow"></div>
+
+    <!-- Окно создания/редактирования блокнота-->
+    <div class="container-sm create-notepad" id="windowCreateNotepad" style="position: absolute; left: 0; right: 0;">
+        <div class="col-lg-5 bg-white mt-5 mx-5 p-2 rounded mx-auto position-relative window-add-notepad">
+            <h4 id="formTitle">Создать блокнот</h4>
+
+            <label for="formNameNotepad" class="m-0">Название блокнота</label>
+            <input class="col-12 p-1" id="formNameNotepad" type="text" style="height: 40px;" placeholder="Например: Покупки">
+
+            <label for="formColorNotepad" class="m-0 mt-2">Цвет блокнота</label>
+            <input  class="col-12" id="formColorNotepad" type="color" value="#222222" style="height: 40px;">
+
+            <button class="btn btn-primary col-12 mt-3" id="formSave">Сохранить</button>
+
+            <button class="btn position-absolute" style="top: 4px; right: 4px;" id="formClose">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Окно редактирования задачи-->
+    <div class="container-sm windowEditTask" id="windowEditTask">
+        <div class="col-lg-5 bg-white mt-5 mx-5 p-2 rounded mx-auto position-relative window-add-notepad task">
+            <h4>Редактировать задачу</h4>
+            <label for="newNameTask" class="m-0">Новое название</label>
+            <input class="col-12 p-1" id="newNameTask" type="text" style="height: 40px;" placeholder="Например: Купить что-то">
+
+            <button class="btn position-absolute" style="top: 4px; right: 50px;" id="deleteTask">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                </svg>
+            </button>
+
+            <button class="btn position-absolute" style="top: 4px; right: 4px;" id="closeEditTask">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                </svg>
+            </button>
+
+            <button class="btn btn-primary col-12 mt-3" id="saveTask">Сохранить</button>
+        </div>
+    </div>
+
+    <!-- Тело-->
+    <div class="container-sm my-2" id="main">
+        <!-- Шапка-->
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <span class="h2">TODO</span>
+            </div>
+            <div class="col-2 d-flex justify-content-end">
+                <a class="btn" id="addNotepad" href="#">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Отображение всех блокнотов-->
+        <div class="row mt-3 p-3" id="allNotepads"></div>
+
+        <!-- Окно блокнота-->
+        <div class="col-12 bg-light text-dark fixed-top fixed-bottom window-notepad" style="z-index: 995;" id="windowNotepad">
+            <div class="container-sm position-relative p-0 h-100">
+                <!-- Кнопки управления-->
+                <div class="d-flex justify-content-end mt-2">
+                    <button class="btn mr-2" id="addTask">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                        </svg>
+                    </button>
+
+                    <button class="btn mr-2" id="deleteNotepad">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                        </svg>
+                    </button>
+
+                    <button class="btn mr-2" id="editNotepad">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                        </svg>
+                    </button>
+
+                    <button class="btn" id="closeWindowNotepad">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div>
+                    <div class="h4 pt-2 col-12 p-0" id="nameNotepad">Name Notepad</div>
+
+                    <div class="input-group mb-2">
+                        <select class="custom-select" id="sort">
+                            <option selected>Сортировка</option>
+                            <option value="priority">Приоритет</option>
+                            <option value="title">Название</option>
+                            <option value="date">Дата</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btnSort">Go</button>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Поиск" id="inputSearch">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btnSearch">Go</button>
+                        </div>
+                    </div>
+
+                    <div id="taskList">
+                        <!-- Список задач -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
